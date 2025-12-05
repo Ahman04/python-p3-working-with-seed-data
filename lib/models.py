@@ -1,6 +1,7 @@
-from sqlalchemy import func
-from sqlalchemy import Column, Integer, String, DateTime
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import create_engine, Column, Integer, String, DateTime, func
+from sqlalchemy.orm import declarative_base
+
+engine = create_engine('sqlite:///seed_db.db')
 
 Base = declarative_base()
 
@@ -16,6 +17,4 @@ class Game(Base):
     updated_at = Column(DateTime(), onupdate=func.now())
 
     def __repr__(self):
-        return f'Game(id={self.id}, ' + \
-            f'title="{self.title}", ' + \
-            f'platform="{self.platform})"'
+        return f"<Game {self.id}: {self.title}>"
